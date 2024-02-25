@@ -80,6 +80,7 @@ function create_tables() {
 
         id int primary key auto_increment,
         name varchar(60) not null,
+        shortname varchar(20) null,
         email varchar(60) null,
         phone varchar(60) null,
         address varchar(100) null,
@@ -244,7 +245,8 @@ function create_tables() {
 
         id int primary key auto_increment,
         course_id int not null,
-        title varchar(60) not null
+        title varchar(160) not null,
+        content text(50000) null
     )";
     $statement = $con->prepare($query);
     $statement->execute();
@@ -336,6 +338,7 @@ function drop_table(string $table) {
 }
 
 // GENERAL QUERY FUNCTION FOR PDO
+// CAN INSERT, FETCH AND DELETE FROM DB
 function query_db(string $query, array $data = []) {
     /*
     Remember that the passed in query string must have postponed parameters
@@ -369,7 +372,7 @@ function query_db(string $query, array $data = []) {
     return [];
 }
 
-// QUERY FUNCTION TO FETCH WITH PDO
+// QUERY FUNCTION TO ONLY FETCH WITH PDO
 function query_fetch(string $query) {
     // Making a connection using PDO
     $string = "mysql:hostname=".DBHOST.";"."dbname=".DBNAME.";";
@@ -382,4 +385,22 @@ function query_fetch(string $query) {
         return $result;
     }
     return [];
+}
+
+// QUERY FUNCTION TO INSERT AND RETURN ID OF INSERTED ITEM
+function query_return_id(string $query, array $data = []) {
+    // Making a connection using PDO
+    $string = "mysql:hostname=".DBHOST.";"."dbname=".DBNAME.";";
+    $con = new PDO($string, DBUSER, DBPASS);
+
+    try {
+        // Prepare and execute the insert query
+        $statement = $con->prepare($query);
+        $statement->execute($data);
+        // Retrieve the ID of the inserted row
+        $last_insert_id = $con->lastInsertId();
+        return $last_insert_id;
+    } catch(Exception) {
+        return null;
+    }
 }

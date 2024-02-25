@@ -4,7 +4,7 @@
 $superstaff = superstaff_logged_in();
 
 // Authenticating view
-if (!isset($_GET['id'])) {
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     // Redirect if no staff id passed
     redirect("staffs");
 } else {
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
     //print_r($_FILES); die();
     // Checking if passport file was sent
     if (!empty($_FILES['passport']['name'])) {
-        // Validate and process logo image
+        // Validate and process passport image
         $upload_image = upload_image($_FILES['passport'], 'users');
 
         if ($upload_image['status'] == "success") {

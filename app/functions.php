@@ -54,7 +54,7 @@ function is_user_authenticated(string $table) {
         $con = new PDO($string, DBUSER, DBPASS);
 
         // Making a query to select item from the database
-        $query = "select * from '$table' where id = $user_id limit 1";
+        $query = "select * from $table where id = $user_id limit 1";
         $result = $con->query($query);
         $users = $result->fetchAll(PDO::FETCH_ASSOC);
 
@@ -85,7 +85,7 @@ function staff_logged_in() {
     // This function depends on is_user_authenticated() function
     if (empty($user)) {
         // Redirect if no staff found
-        redirect(ROOT."staff/login", "Please sign in", "danger");
+        redirect(ROOT."/staff/login", "Please sign in", "danger");
     } else if ($user['is_superuser'] == 1) {
         // Redirect to management dashboard if superstaff
         redirect(ROOT."management/dashboard");
@@ -99,7 +99,7 @@ function superstaff_logged_in() {
     // This function depends on is_user_authenticated() function
     if (empty($user) || $user['is_superuser'] == 0) {
         // Redirect if no user found or user is not management staff
-        redirect(ROOT."staff/login");
+        redirect(ROOT."/staff/login");
     }
     return $user;
 }
@@ -299,64 +299,25 @@ function generate_unique_id($length = 10) {
     return $id;
 }
 
-// FUNCTION TO VALIDATE AND UPLOAD DOCUMENTS
-function upload_document($file, string $folder = '') {
-    $file_name = $file['name'];
-    $file_tmp_name = $file['tmp_name'];
-    $file_size = $file['size'];
-    $file_error = $file['error'];
-    $response = [];
+// FUNCTION TO REORGANISE MULTIPLE $_FILES OBJECTS
+function organise_files($files) {
 
-    if ($file_error === 0) {
-        // If no errors
-        if ($file_size > 5242880) {
-            $response = [
-                'status'=>"failed",
-                'message'=> "File size is too large. Maximum allowable file size is 2mb"
-            ];
-        } else {
-            // If file size is below size limit
-
-            // Extracting file extension from file name
-            $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
-            // Setting file extension to lowercase
-            $file_extension = strtolower($file_extension);
-            // Allowable extensions
-            $accepted_extensions = array('pdf', 'doc', 'docs', 'docx', 'csv', 'xlsx', 'ppt', 'jpeg', 'jpg');
-
-            if (in_array($file_extension, $accepted_extensions)) {
-                // If file extension is among accepted extensions
-
-                // Generating a new unique name and appending to the file extension
-                $new_file_name = uniqid("DOC-", true).'.'.$file_extension;
-                // Defining the upload path
-                $document_upload_path = MEDIA_PATH . '/' . $folder . '/' . $new_file_name;
-                // Moving uploaded file to defined upload path
-                move_uploaded_file($file_tmp_name, $document_upload_path);
-                // Giving positive feedback or response
-                $response = [
-                    'status'=>"success",
-                    'message'=> "Upload successful",
-                    'new_file_name'=> $new_file_name
-                ];
-            } else {
-                $response = [
-                    'status'=>"failed",
-                    'message'=> "Invalid file type"
-                ];
-            }
+    // New empty array
+    $organized_files = array();
+    
+    foreach ($files as $key => $fileAttributes) {
+        foreach ($fileAttributes as $index => $value) {
+            $organized_files[$index][$key] = $value;
         }
-    } else {
-        $response = [
-            'status'=>"failed",
-            'message'=> "Unknown error occured"
-        ];
     }
-    return $response;
+    
+    // Now $organized_files is an array of arrays
+    // each representing a single file
+    return $organized_files;
 }
 
-// FUNCTION TO VALIDATE AND UPLOAD IMAGES
-function upload_image($file, string $folder = '') {
+// FUNCTION TO VALIDATE AND UPLOAD SINGLE IMAGES
+function upload_image($file, string $folder) {
     $file_name = $file['name'];
     $file_tmp_name = $file['tmp_name'];
     $file_size = $file['size'];
@@ -411,25 +372,8 @@ function upload_image($file, string $folder = '') {
     return $response;
 }
 
-// FUNCTION TO REORGANISE MULTIPLE $_FILES OBJECTS
-function organise_files($files) {
-
-    // New empty array
-    $organized_files = array();
-    
-    foreach ($files as $key => $fileAttributes) {
-        foreach ($fileAttributes as $index => $value) {
-            $organized_files[$index][$key] = $value;
-        }
-    }
-    
-    // Now $organized_files is an array of arrays
-    // each representing a single file
-    return $organized_files;
-}
-
-// FUNCTION TO VALIDATE AND UPLOAD IMAGES
-function upload_multiple_image($files, string $folder = '') {
+// FUNCTION TO VALIDATE AND UPLOAD MULTIPLE IMAGES
+function upload_multiple_images($files, string $folder) {
     // Reorganising files
     $files = organise_files($files);
     // Number of files passed
@@ -491,6 +435,256 @@ function upload_multiple_image($files, string $folder = '') {
         $response = [
             'status'=>"failed",
             'message'=> "No image was uploaded",
+            'total_uploaded'=> $total_uploaded
+        ];
+    }
+    return $response;
+}
+
+// FUNCTION TO VALIDATE AND UPLOAD SINGLE DOCUMENTS
+function upload_document($file, string $folder) {
+    $file_name = $file['name'];
+    $file_tmp_name = $file['tmp_name'];
+    $file_size = $file['size'];
+    $file_error = $file['error'];
+    $response = [];
+
+    if ($file_error === 0) {
+        // If no errors
+        if ($file_size > 524288000) {
+            $response = [
+                'status'=>"failed",
+                'message'=> "File size is too large. Maximum allowable file size is 500mb"
+            ];
+        } else {
+            // If file size is below size limit
+
+            // Extracting file extension from file name
+            $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            // Setting file extension to lowercase
+            $file_extension = strtolower($file_extension);
+            // Allowable extensions
+            $accepted_extensions = array('zip', 'rar', 'pdf', 'doc', 'docs', 'docx', 'csv', 'xlsx', 'ppt', 'jpeg', 'jpg');
+
+            if (in_array($file_extension, $accepted_extensions)) {
+                // If file extension is among accepted extensions
+
+                // Generating a new unique name and appending to the file extension
+                $new_file_name = uniqid("DOC-", true).'.'.$file_extension;
+                // Defining the upload path
+                $document_upload_path = MEDIA_PATH . '/' . $folder . '/' . $new_file_name;
+                // Moving uploaded file to defined upload path
+                move_uploaded_file($file_tmp_name, $document_upload_path);
+                // Giving positive feedback or response
+                $response = [
+                    'status'=>"success",
+                    'message'=> "Upload successful",
+                    'new_file_name'=> $new_file_name
+                ];
+            } else {
+                $response = [
+                    'status'=>"failed",
+                    'message'=> "Invalid file type"
+                ];
+            }
+        }
+    } else {
+        $response = [
+            'status'=>"failed",
+            'message'=> "Unknown error occured"
+        ];
+    }
+    return $response;
+}
+
+// FUNCTION TO VALIDATE AND UPLOAD MULTIPLE DOCUMENTS
+function upload_multiple_documents($files, string $folder) {
+    // Reorganising files
+    $files = organise_files($files);
+    // Number of files passed
+    $total_files = count($files);
+    // Default state
+    $uploaded_files = [];
+    $total_uploaded = 0;
+
+    foreach($files as $file) {
+        $file_name = $file['name'];
+        $file_tmp_name = $file['tmp_name'];
+        $file_size = $file['size'];
+        $file_error = $file['error'];
+        
+
+        if ($file_error === 0 && $file_size < 524288000) {
+            // If no errors and file size is below size limit (500MB)
+    
+            // Extracting file extension from file name
+            $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            // Setting file extension to lowercase
+            $file_extension = strtolower($file_extension);
+            // Allowable extensions
+            $accepted_extensions = array('zip', 'rar', 'pdf', 'doc', 'docs', 'docx', 'csv', 'xlsx', 'ppt', 'jpeg', 'jpg');
+
+            if (in_array($file_extension, $accepted_extensions)) {
+                // If file extension is among accepted extensions
+
+                // Generating a new unique name and appending to the file extension
+                $new_file_name = uniqid("DOC-", true).'.'.$file_extension;
+                // Defining the upload path
+                $image_upload_path = MEDIA_PATH . '/' . $folder . '/' . $new_file_name;
+                // Moving uploaded file to defined upload path
+                move_uploaded_file($file_tmp_name, $image_upload_path);
+                // Adding new file to uploaded file list
+                array_push($uploaded_files, $new_file_name);
+                // Increment files uploaded
+                $total_uploaded++;
+            }
+
+        }
+    };
+
+    if ($total_uploaded == $total_files) {
+        $response = [
+            'status'=>"success",
+            'message'=> "All docs uploaded successfully",
+            'documents' => $uploaded_files,
+            'total_uploaded'=> $total_uploaded
+        ];
+    } else if ($total_uploaded > 0 && $total_uploaded < $total_files) {
+        $response = [
+            'status'=>"partial",
+            'message'=> $total_uploaded." out of ".$total_files." docs uploaded succesfully",
+            'documents' => $uploaded_files,
+            'total_uploaded'=> $total_uploaded
+        ];
+    } else if ($total_uploaded == 0) {
+        $response = [
+            'status'=>"failed",
+            'message'=> "No doc was uploaded",
+            'total_uploaded'=> $total_uploaded
+        ];
+    }
+    return $response;
+}
+
+// FUNCTION TO VALIDATE AND UPLOAD SINGLE VIDEO
+function upload_video($file, string $folder) {
+    $file_name = $file['name'];
+    $file_tmp_name = $file['tmp_name'];
+    $file_size = $file['size'];
+    $file_error = $file['error'];
+    $response = [];
+
+    if ($file_error === 0) {
+        // If no errors
+        if ($file_size > 1073741824) {
+            $response = [
+                'status'=>"failed",
+                'message'=> "File size is too large. Maximum allowable file size is 1GB"
+            ];
+        } else {
+            // If file size is below size limit
+
+            // Extracting file extension from file name
+            $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            // Setting file extension to lowercase
+            $file_extension = strtolower($file_extension);
+            // Allowable extensions
+            $accepted_extensions = array('mp4', 'mkv');
+
+            if (in_array($file_extension, $accepted_extensions)) {
+                // If file extension is among accepted extensions
+
+                // Generating a new unique name and appending to the file extension
+                $new_file_name = uniqid("VID-", true).'.'.$file_extension;
+                // Defining the upload path
+                $image_upload_path = MEDIA_PATH . '/' . $folder . '/' . $new_file_name;
+                // Moving uploaded file to defined upload path
+                move_uploaded_file($file_tmp_name, $image_upload_path);
+                // Giving positive feedback or response
+                $response = [
+                    'status'=>"success",
+                    'message'=> "Upload successful",
+                    'new_file_name'=> $new_file_name
+                ];
+            } else {
+                $response = [
+                    'status'=>"failed",
+                    'message'=> "Invalid file type"
+                ];
+            }
+        }
+    } else {
+        $response = [
+            'status'=>"failed",
+            'message'=> "Unknown error occured"
+        ];
+    }
+    return $response;
+}
+
+// FUNCTION TO VALIDATE AND UPLOAD MULTIPLE VIDEOS
+function upload_multiple_videos($files, string $folder) {
+    // Reorganising files
+    $files = organise_files($files);
+    // Number of files passed
+    $total_files = count($files);
+    // Default state
+    $uploaded_files = [];
+    $total_uploaded = 0;
+
+    foreach($files as $file) {
+        $file_name = $file['name'];
+        $file_tmp_name = $file['tmp_name'];
+        $file_size = $file['size'];
+        $file_error = $file['error'];
+        
+
+        if ($file_error === 0 && $file_size < 1073741824) {
+            // If no errors and file size is below size limit (1GB)
+    
+            // Extracting file extension from file name
+            $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            // Setting file extension to lowercase
+            $file_extension = strtolower($file_extension);
+            // Allowable extensions
+            $accepted_extensions = array('mp4', 'mkv');
+
+            if (in_array($file_extension, $accepted_extensions)) {
+                // If file extension is among accepted extensions
+
+                // Generating a new unique name and appending to the file extension
+                $new_file_name = uniqid("VID-", true).'.'.$file_extension;
+                // Defining the upload path
+                $image_upload_path = MEDIA_PATH . '/' . $folder . '/' . $new_file_name;
+                // Moving uploaded file to defined upload path
+                move_uploaded_file($file_tmp_name, $image_upload_path);
+                // Adding new file to uploaded file list
+                array_push($uploaded_files, $new_file_name);
+                // Increment files uploaded
+                $total_uploaded++;
+            }
+
+        }
+    };
+
+    if ($total_uploaded == $total_files) {
+        $response = [
+            'status'=>"success",
+            'message'=> "All videos uploaded successfully",
+            'videos' => $uploaded_files,
+            'total_uploaded'=> $total_uploaded
+        ];
+    } else if ($total_uploaded > 0 && $total_uploaded < $total_files) {
+        $response = [
+            'status'=>"partial",
+            'message'=> $total_uploaded." out of ".$total_files." videos uploaded succesfully",
+            'videos' => $uploaded_files,
+            'total_uploaded'=> $total_uploaded
+        ];
+    } else if ($total_uploaded == 0) {
+        $response = [
+            'status'=>"failed",
+            'message'=> "No video was uploaded",
             'total_uploaded'=> $total_uploaded
         ];
     }
@@ -687,6 +881,16 @@ function fetch_department(int $id) {
         return $matched_departments[0]['name'];
     }
     return "Invalid Department";
+}
+
+// FUNCTION TO FETCH COURSES USING THEIR IDS
+function fetch_course(int $id) {
+    $matched_courses = query_fetch("SELECT * FROM courses WHERE id = $id LIMIT 1");
+
+    if (!empty($matched_courses)) {
+        return $matched_courses[0]['title'];
+    }
+    return "Invalid Course";
 }
 
 // FUNCTION TO EXTRACT YEAR FROM A DATE/DATETIME

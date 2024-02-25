@@ -31,10 +31,10 @@
                             <table id="example3" class="table header-border table-hover verticle-middle" style="min-width: 845px">
                                 <thead>
                                     <tr>
-                                        <th>Faculty</th>
-                                        <th>Dept. Code</th>
                                         <th>Dept. Name</th>
                                         <th>Dept. Short Name</th>
+                                        <th>Dept. Code</th>
+                                        <th>Faculty</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -48,10 +48,10 @@
                                     <?php else: ?>
                                         <?php foreach($context['departments']['result'] as $department): ?>
                                             <tr>
-                                                <td><?=fetch_faculty($department['faculty_id']); ?></td>
-                                                <td><?=$department['department_code']; ?></td>
                                                 <td><?=$department['name']; ?></td>
                                                 <td><?=$department['short_name']; ?></td>
+                                                <td><?=$department['department_code']; ?></td>
+                                                <td><?=fetch_faculty($department['faculty_id']); ?></td>
                                                 <td>
                                                     <a href="edit-department?id=<?=$department['id']; ?>" class="btn btn-sm btn-primary"><i class="la la-pencil"></i></a>
                                                     <a href="javascript:void(0);" class="btn btn-sm btn-danger"><i class="la la-trash-o"></i></a>

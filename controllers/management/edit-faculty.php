@@ -4,7 +4,7 @@
 $superstaff = superstaff_logged_in();
 
 // Authenticating view
-if (!isset($_GET['id'])) {
+if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     // Redirect if no faculty id passed
     redirect("faculties");
 } else {

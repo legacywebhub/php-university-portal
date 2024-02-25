@@ -9,6 +9,8 @@
     <title><?=$context['title']; ?></title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?=STATIC_ROOT; ?>/dashboard/images/favicon.png">
+    <!-- Summernote -->
+    <link rel="stylesheet" href="<?=STATIC_ROOT; ?>/dashboard/vendor/summernote/summernote.css">
     <link rel="stylesheet" href="<?=STATIC_ROOT; ?>/dashboard/vendor/jqvmap/css/jqvmap.min.css">
 	<link rel="stylesheet" href="<?=STATIC_ROOT; ?>/dashboard/vendor/chartist/css/chartist.min.css">
 	<link rel="stylesheet" href="<?=STATIC_ROOT; ?>/dashboard/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
@@ -202,10 +204,16 @@
                             <li><a href="index-3.html">Dashboard 3</a></li>
                         </ul>
                     </li>
-					<li><a class="ai-icon" href="event-management.html" aria-expanded="false">
-							<i class="la la-calendar"></i>
-							<span class="nav-text">Event Management</span>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+							<i class="la la-building"></i>
+							<span class="nav-text">Faculties & Departments</span>
 						</a>
+                        <ul aria-expanded="false">
+                            <li><a href="faculties">All Faculties</a></li>
+                            <li><a href="add-faculty">Add Faculty</a></li>
+                            <li><a href="departments">All Departments</a></li>
+                            <li><a href="add-department">Add Department</a></li>
+                        </ul>
                     </li>
 					<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
 							<i class="la la-user"></i>
@@ -223,17 +231,6 @@
                         <ul aria-expanded="false">
                             <li><a href="students">All Students</a></li>
                             <li><a href="add-student">Add Students</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
-							<i class="la la-building"></i>
-							<span class="nav-text">Faculties & Departments</span>
-						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="faculties">All Faculties</a></li>
-                            <li><a href="add-faculty">Add Faculty</a></li>
-                            <li><a href="departments">All Departments</a></li>
-                            <li><a href="add-department">Add Department</a></li>
                         </ul>
                     </li>
 					<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -259,10 +256,10 @@
 							<span class="nav-text">Holiday</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="all-holiday.html">All Holiday</a></li>
-                            <li><a href="add-holiday.html">Add Holiday</a></li>
-                            <li><a href="edit-holiday.html">Edit Holiday</a></li>
-                            <li><a href="holiday-calendar.html">Holiday Calendar</a></li>
+                            <li><a href="javascript:void()">All Holiday</a></li>
+                            <li><a href="javascript:void()">Add Holiday</a></li>
+                            <li><a href="javascript:void()">Edit Holiday</a></li>
+                            <li><a href="javascript:void()">Holiday Calendar</a></li>
                         </ul>
                     </li>
 					<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -274,7 +271,12 @@
                             <li><a href="add-fees.html">Add Fees</a></li>
                             <li><a href="fees-receipt.html">Fees Receipt</a></li>
                         </ul>
-                    </li>					
+                    </li>
+                    <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
+							<i class="la la-calendar"></i>
+							<span class="nav-text">Event Management</span>
+						</a>
+                    </li>			
 				</ul>
             </div>
         </div>
@@ -332,6 +334,11 @@
 	<script src="<?=STATIC_ROOT; ?>/dashboard/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     <script src="<?=STATIC_ROOT; ?>/dashboard/js/custom.min.js"></script>
 	<script src="<?=STATIC_ROOT; ?>/dashboard/js/dlabnav-init.js"></script>
+
+    <!-- Summernote -->
+    <script src="<?=STATIC_ROOT; ?>/dashboard/vendor/summernote/js/summernote.min.js"></script>
+    <!-- Summernote init -->
+    <script src="<?=STATIC_ROOT; ?>/dashboard/js/plugins-init/summernote-init.js"></script>
 
     <!-- Chart ChartJS plugin files -->
     <script src="<?=STATIC_ROOT; ?>/dashboard/vendor/chart.js/Chart.bundle.min.js"></script>
