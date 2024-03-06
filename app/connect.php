@@ -80,7 +80,7 @@ function create_tables() {
 
         id int primary key auto_increment,
         name varchar(60) not null,
-        shortname varchar(20) null,
+        shortname varchar(20) not null,
         email varchar(60) null,
         phone varchar(60) null,
         address varchar(100) null,
@@ -316,9 +316,43 @@ function create_tables() {
     $query = "create table if not exists messages(
 
         id int primary key auto_increment,
-        user_id int not null,
+        sender_id int not null,
+        receiver_id int not null,
         subject varchar(60) null,
         message text(2050) not null,
+        date datetime default current_timestamp
+
+    )";
+    $statement = $con->prepare($query);
+    $statement->execute();
+
+    // purpose - School Fee, Gs Fee, Exam, Departmental Dues
+    // method - online, cash, transfer, card
+    $query = "create table if not exists fees(
+
+        id int primary key auto_increment,
+        invoice_id varchar(30) not null,
+        student_id int not null,
+        department_id int not null,
+        level int not null,
+        amount int not null,
+        purpose varchar(60) not null,
+        details text(2050) null,
+        payment_method varchar(60) not null,
+        date datetime default current_timestamp
+
+    )";
+    $statement = $con->prepare($query);
+    $statement->execute();
+
+    // type - Public Holiday, National Holiday, Office Holiday
+    $query = "create table if not exists holidays(
+
+        id int primary key auto_increment,
+        type varchar(60) not null,
+        payment varchar(60) not null,
+        details text(2050) null,
+        
         date datetime default current_timestamp
 
     )";

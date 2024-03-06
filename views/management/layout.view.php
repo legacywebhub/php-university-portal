@@ -161,7 +161,11 @@
                             </li>
                             <li class="nav-item dropdown header-profile">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown">
-                                    <img src="images/profile/education/pic1.jpg" width="20" alt="">
+                                    <?php if (empty($context['superstaff']['passport'])): ?>
+                                    <img class="rounded-circle" width="30" src="<?=STATIC_ROOT; ?>/default_user.png">
+                                    <?php else: ?>
+                                    <img class="rounded-circle" width="30" src="<?=MEDIA_ROOT; ?>/users/<?=$context['superstaff']['passport']; ?>">
+                                    <?php endif ?>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="app-profile.html" class="dropdown-item ai-icon">
@@ -356,6 +360,9 @@
     <script src="<?=STATIC_ROOT; ?>/dashboard/vendor/svganimation/vivus.min.js"></script>
     <script src="<?=STATIC_ROOT; ?>/dashboard/vendor/svganimation/svg.animation.js"></script>
     <script src="<?=STATIC_ROOT; ?>/dashboard/js/styleSwitcher.js"></script>
+
+    <!-- Font Awesome -->
+    <script src="<?=STATIC_ROOT; ?>/dashboard/js/all.min.js"></script>
 	
     <script>
         // This function

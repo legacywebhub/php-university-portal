@@ -817,7 +817,7 @@ function sendMail($to, $subject, $email_values = array()) {
 ////////////////////// PROJECT SPECIFIC FUNCTIONS /////////////////////////////
 
 // FUNCTION TO FETCH IMAGE
-function fetch_image($image, $folder = null) {
+function fetch_image($image, $folder) {
     // Setting image path depending if a folder was passed
     $image_path = (is_null($folder)) ? $image : "$folder/$image";
 
@@ -830,7 +830,7 @@ function fetch_image($image, $folder = null) {
 }
 
 // FUNCTION TO FETCH IMAGE
-function fetch_user_image($image, $folder = null) {
+function fetch_user_image($image, $folder) {
     // Setting image path depending if a folder was passed
     $image_path = (is_null($folder)) ? $image : "$folder/$image";
 
@@ -847,7 +847,12 @@ function fetch_student(int $id) {
     $matched_students = query_fetch("SELECT * FROM students WHERE id = $id LIMIT 1");
 
     if (!empty($matched_students)) {
-        return $matched_students[0]['firstname']." ".$matched_students[0]['lastname'];
+        $student = $matched_students[0];
+        // Appending extra student details
+        $student += [
+            'fullname'=>$matched_students[0]['firstname']." ".$matched_students[0]['lastname']
+        ];
+        return $student;
     }
     return "Invalid Student";
 }
@@ -858,7 +863,11 @@ function fetch_staff(int $id) {
 
     if (!empty($matched_staffs)) {
         $staff = $matched_staffs[0]; 
-        return $staff['title']." ".$staff['firstname']." ".$staff['lastname'];
+        // Appending extra staff details
+        $staff += [
+            'fullname'=>$matched_staffs[0]['firstname']." ".$matched_staffs[0]['lastname']
+        ];
+        return $staff;
     }
     return "Invalid Staff";
 }

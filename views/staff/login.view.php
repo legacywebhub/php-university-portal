@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Edumin - Bootstrap Admin Dashboard </title>
+    <title><?=$context['title']; ?></title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?=STATIC_ROOT; ?>/dashboard/images/favicon.png">
     <link href="<?=STATIC_ROOT; ?>/dashboard/css/style.css" rel="stylesheet">
@@ -60,7 +60,7 @@
                                         </div>
                                     </form>
                                     <div class="new-account mt-3">
-                                        <p>Are you a staff? <a class="text-primary" href="#">Sign in</a> here instead </p>
+                                        <p>Are you a student? <a class="text-primary" href="<?=ROOT; ?>/student/login">Sign in</a> here instead </p>
                                     </div>
                                 </div>
                             </div>

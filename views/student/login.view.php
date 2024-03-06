@@ -38,11 +38,11 @@
                                         <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']; ?>">
                                         <div class="form-group">
                                             <label><strong>Matriculation Number <span class="text-danger">*</span></strong></label>
-                                            <input type="text" name="matric_number" class="form-control" maxlength="10" onkeypress="return onlyNumberKey(event)">
+                                            <input type="text" name="matric_number" class="form-control" maxlength="15" required>
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Password <span class="text-danger">*</span></strong></label>
-                                            <input type="password" name="password" class="form-control" maxlength="50">
+                                            <input type="password" name="password" class="form-control" maxlength="50" required>
                                         </div>
                                         <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                             <div class="form-group">
@@ -60,7 +60,7 @@
                                         </div>
                                     </form>
                                     <div class="new-account mt-3">
-                                        <p>Are you a staff? <a class="text-primary" href="#">Sign in</a> here instead </p>
+                                        <p>Are you a staff? <a class="text-primary" href="<?=ROOT; ?>/staff/login">Sign in</a> here instead </p>
                                     </div>
                                 </div>
                             </div>
