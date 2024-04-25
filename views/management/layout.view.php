@@ -97,6 +97,9 @@
                         </div>
 
                         <ul class="navbar-nav header-right">
+                            <li class="nav-item">
+                                <a href="join-room" class="btn btn-primary">Create or join room</a>
+                            </li>
                             <li class="nav-item dropdown notification_dropdown">
                                 <a class="nav-link bell ai-icon" href="#" role="button" data-toggle="dropdown">
                                     <svg id="icon-user" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
@@ -126,35 +129,6 @@
                                             </div>
                                             <span class="notify-time">3:20 am</span>
                                         </li>
-                                        <li class="media dropdown-item">
-                                            <span class="danger"><i class="ti-bookmark"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>Robin</strong> marked a <strong>ticket</strong> as unsolved.
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="primary"><i class="ti-heart"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong>David</strong> purchased Light Dashboard 1.0.</p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
-                                        <li class="media dropdown-item">
-                                            <span class="success"><i class="ti-image"></i></span>
-                                            <div class="media-body">
-                                                <a href="#">
-                                                    <p><strong> James.</strong> has added a<strong>customer</strong> Successfully
-                                                    </p>
-                                                </a>
-                                            </div>
-                                            <span class="notify-time">3:20 am</span>
-                                        </li>
                                     </ul>
                                     <a class="all-notification" href="#">See all notifications <i class="ti-arrow-right"></i></a>
                                 </div>
@@ -168,15 +142,15 @@
                                     <?php endif ?>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="app-profile.html" class="dropdown-item ai-icon">
+                                    <a href="javascript:void(0);" class="dropdown-item ai-icon">
                                         <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                         <span class="ml-2">Profile </span>
                                     </a>
-                                    <a href="email-inbox.html" class="dropdown-item ai-icon">
+                                    <a href="javascript:void(0);" class="dropdown-item ai-icon">
                                         <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                         <span class="ml-2">Inbox </span>
                                     </a>
-                                    <a href="page-login.html" class="dropdown-item ai-icon">
+                                    <a href="logout" class="dropdown-item ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
                                         <span class="ml-2">Logout </span>
                                     </a>
@@ -198,17 +172,12 @@
             <div class="dlabnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Main Menu</li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <li><a href="dashboard" aria-expanded="false">
 							<i class="la la-home"></i>
 							<span class="nav-text">Dashboard</span>
 						</a>
-                        <ul aria-expanded="false">
-                            <li><a href="index.html">Dashboard 1</a></li>
-                            <li><a href="index-2.html">Dashboard 2</a></li>
-                            <li><a href="index-3.html">Dashboard 3</a></li>
-                        </ul>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
 							<i class="la la-building"></i>
 							<span class="nav-text">Faculties & Departments</span>
 						</a>
@@ -219,7 +188,7 @@
                             <li><a href="add-department">Add Department</a></li>
                         </ul>
                     </li>
-					<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+					<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
 							<i class="la la-user"></i>
 							<span class="nav-text">Staffs</span>
 						</a>
@@ -228,7 +197,7 @@
                             <li><a href="add-staff">Add Staffs</a></li>
                         </ul>
                     </li>
-					<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+					<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
 							<i class="la la-users"></i>
 							<span class="nav-text">Students</span>
 						</a>
@@ -237,7 +206,7 @@
                             <li><a href="add-student">Add Students</a></li>
                         </ul>
                     </li>
-					<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+					<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
 							<i class="la la-graduation-cap"></i>
 							<span class="nav-text">Courses</span>
 						</a>
@@ -246,7 +215,7 @@
                             <li><a href="add-course">Add Courses</a></li>
                         </ul>
                     </li>
-					<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+					<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
 							<i class="la la-book"></i>
 							<span class="nav-text">Library</span>
 						</a>
@@ -255,28 +224,28 @@
                             <li><a href="#">Add Library</a></li>
                         </ul>
                     </li>
-					<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+					<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
 							<i class="la la-gift"></i>
 							<span class="nav-text">Holiday</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="javascript:void()">All Holiday</a></li>
-                            <li><a href="javascript:void()">Add Holiday</a></li>
-                            <li><a href="javascript:void()">Edit Holiday</a></li>
-                            <li><a href="javascript:void()">Holiday Calendar</a></li>
+                            <li><a href="javascript:void(0);">All Holiday</a></li>
+                            <li><a href="javascript:void(0);">Add Holiday</a></li>
+                            <li><a href="javascript:void(0);">Edit Holiday</a></li>
+                            <li><a href="javascript:void(0);">Holiday Calendar</a></li>
                         </ul>
                     </li>
-					<li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+					<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">
 							<i class="la la-dollar"></i>
 							<span class="nav-text">Fees</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="fees-collection.html">Fees Collection</a></li>
-                            <li><a href="add-fees.html">Add Fees</a></li>
-                            <li><a href="fees-receipt.html">Fees Receipt</a></li>
+                            <li><a href="javascript:void(0);">Fees Collection</a></li>
+                            <li><a href="javascript:void(0);">Add Fees</a></li>
+                            <li><a href="javascript:void(0);">Fees Receipt</a></li>
                         </ul>
                     </li>
-                    <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
+                    <li><a class="ai-icon" href="javascript:void(0);" aria-expanded="false">
 							<i class="la la-calendar"></i>
 							<span class="nav-text">Event Management</span>
 						</a>
@@ -371,34 +340,46 @@
             // use onchange="previewImage(this.files[0]);" on the input field
         };
 
+        // This functions enforce input fields to only accept alphabet keystrokes
+        function onlyAlphabeticalKey(evt) {
+            // Only ASCII character in that range allowed
+            var ASCIICode = (evt.which) ? evt.which : evt.keyCode;
+            if ((ASCIICode >= 65 && ASCIICode <= 90) || (ASCIICode >= 97 && ASCIICode <= 122)) {
+                return true; // Allow alphabetical characters
+            } else {
+                return false; // Block other characters
+            }
+            // Use onkeypress="return onlyAlphabeticalKey(event)" on the input field
+        }
+
         // This function only allows input fields to accept number keystrokes
         function onlyNumberKey(evt) {
-        // Only ASCII character in that range allowed
-        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
-        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
-        return false; 
-        return true;
-        // use onkeypress="return onlyNumberKey(event)" on the input field
+            // Only ASCII character in that range allowed
+            var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+            if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false; 
+            return true;
+            // use onkeypress="return onlyNumberKey(event)" on the input field
         }
 
         // Copy texts js
         function copyText(arg) {
-        console.log('clicked a button');
-        // Get the input or text field
-        // var copyText = document.getElementById("myInput");
+            console.log('clicked a button');
+            // Get the input or text field
+            // var copyText = document.getElementById("myInput");
 
-        // Select the text field
-        arg.select();
-        arg.setSelectionRange(0, 99999); // For mobile devices
+            // Select the text field
+            arg.select();
+            arg.setSelectionRange(0, 99999); // For mobile devices
 
-        // Copy the text inside the text field
-        navigator.clipboard.writeText(arg.value).then(()=>{
-            // Alert the copied text
-            alert("Copied");
-        }).catch(()=>{
-            // Alert the copied text
-            alert("Something went wrong");
-        });
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(arg.value).then(()=>{
+                // Alert the copied text
+                alert("Copied");
+            }).catch(()=>{
+                // Alert the copied text
+                alert("Something went wrong");
+            });
         }
     </script>
 </body>

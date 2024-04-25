@@ -25,7 +25,7 @@ if ($_SERVER["SERVER_NAME"]  == "localhost") {
     define('DBPASS', "");
 
     // HTML BASE PATHS
-    define('ROOT', "http://localhost/php-university-portal");
+    define('ROOT', "http://localhost/uniportal");
     define('MEDIA_ROOT', ROOT . '/media');
     define('STATIC_ROOT', ROOT . '/assets');
 
@@ -44,23 +44,23 @@ if ($_SERVER["SERVER_NAME"]  == "localhost") {
 
     // DATABASE PARAMETERS FOR PRODUCTION/LIVE
     define('DBHOST', "localhost");
-    define('DBNAME', "learningportal_db");
-    define('DBUSER', "learningportal_user");
-    define('DBPASS', "p@ssword123");
+    define('DBNAME', "uniportal_db");
+    define('DBUSER', "uniportal_user");
+    define('DBPASS', "password123");
 
     // HTML BASE PATHS
-    define('ROOT', "//learningportal.com");
+    define('ROOT', "//uniportal.com");
     define('MEDIA_ROOT', ROOT . '/media');
     define('STATIC_ROOT', ROOT . '/assets');
 
     // EMAIL CONFIG
-    define('EMAIL_HOST', "mail.learningportal.com");
-    define('EMAIL_USERNAME', "support@learningportal.com");
-    define('EMAIL_PASSWORD', "p@ssword123");
+    define('EMAIL_HOST', "mail.uniportal.com");
+    define('EMAIL_USERNAME', "support@uniportal.com");
+    define('EMAIL_PASSWORD', "password123");
     define('EMAIL_PORT', 465);
 
     // OTHERS
-    define('DOMAIN', 'legacywebhub.com');
+    define('DOMAIN', 'uniportal.com');
 }
 
 // SECURING OUR SESSIONS

@@ -9,7 +9,7 @@ $title = ucfirst($uni['name'])." | Add Student";
 $departments = query_fetch("SELECT * FROM departments");
 
 
-// Handling add service request
+// Handling add student request
 if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
     
     // Checking if passport file was sent

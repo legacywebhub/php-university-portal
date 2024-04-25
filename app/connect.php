@@ -89,7 +89,20 @@ function create_tables() {
     $statement = $con->prepare($query);
     $statement->execute();
 
-    // Student table
+    // Conference room table
+    $query = "create table if not exists rooms(
+
+        id int primary key auto_increment,
+        name varchar(20) not null,
+        expires datetime null,
+
+        key name (name),
+        unique (name)
+    )";
+    $statement = $con->prepare($query);
+    $statement->execute();
+
+    // Students table
     $query = "create table if not exists students(
 
         id int primary key auto_increment,

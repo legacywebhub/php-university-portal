@@ -45,6 +45,10 @@ if (count($url) == 1) {
     // Assume it's the dashboard if sub path not given
     $section = $url[1] ?? 'dashboard';
     $file_name = APP_PATH . "controllers/management/$section.php";
+} else if (count($url) == 2 && $url[0] == 'connect') {
+    // Assume it's the dashboard if sub path not given
+    $section = $url[1] ?? 'room';
+    $file_name = APP_PATH . "controllers/connect/$section.php";
 } else if (count($url) > 2) {
     $file_name = APP_PATH . "404.php";
 } else {

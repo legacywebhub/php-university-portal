@@ -60,7 +60,7 @@
                                                     <?php endif ?>
                                                     </a>
                                                 </td>
-                                                <td><?=fetch_staff($staff['id']); ?></td>
+                                                <td><?=fetch_staff($staff['id'])['fullname']; ?></td>
                                                 <td><?=$staff['email']; ?></td>
                                                 <td><?=$staff['gender']; ?></td>
                                                 <td><?=fetch_department($staff['department_id']); ?></td>
