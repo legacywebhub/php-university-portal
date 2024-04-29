@@ -1,37 +1,15 @@
 <?php
 
-// Authorizing management staff
+// Authorizing staff
 $staff = staff_logged_in();
-
-// Authenticating view
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    // Redirect if no course id passed
-    redirect("courses");
-} else {
-
-    try {
-        $id = intval($_GET['id']);
-        $matching_courses = query_fetch("SELECT * FROM courses WHERE id = $id LIMIT 1");
-
-        if (empty($matching_courses)) {
-            // Redirect if no matching course
-            redirect("courses");
-        } else {
-            // Else return course
-            $course = $matching_courses[0];
-        }
-    } catch (Exception) {
-        redirect("courses");
-    }
-}
 
 // Other variables
 $uni = query_fetch("SELECT * FROM settings ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($uni['name'])." | Edit Course";
+$title = ucfirst($uni['name'])." | Add Course";
 $departments = query_fetch("SELECT * FROM departments");
 
 
-// Handling edit course request
+// Handling add course request
 if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
     
     // Checking if course image file was sent
@@ -40,19 +18,18 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
         $upload_image = upload_image($_FILES['course_image'], 'users');
 
         if ($upload_image['status'] == "success") {
-            // Setting uploaded image as course image
+            // Setting uploaded image as passort
             $course_image = $upload_image['new_file_name'];
         } else {
-            $course_image = $course['course_image'];
+            $course_image = null;
         }
         
     } else {
-        $course_image = $course['course_image'];
+        $course_image = null;
     }
 
     // Declaring DB variables as PHP array
     $data = [
-        'id'=> $id,
         'department_id' => sanitize_input($_POST['department']),
         'level' => sanitize_input($_POST['level']),
         'semester' => sanitize_input($_POST['semester']),
@@ -64,16 +41,17 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
     ];
     
     try {
-        $query = "UPDATE courses SET department_id = :department_id, level = :level, semester = :semester, lecturers = :lecturers, course_image = :course_image, course_code = :course_code, title = :title, description = :description WHERE id = :id LIMIT 1";
+        $query = "INSERT INTO courses (department_id, level, semester, lecturers, course_image, course_code, title, description) 
+        VALUES (:department_id, :level, :semester, :lecturers, :course_image, :course_code, :title, :description)";
         $query = query_db($query, $data);
-        $message = "Course was successfully updated";
+        $message = "Course was successfully added";
         $message_tag = "success";
         redirect('courses', $message, $message_tag);
     } catch(Exception $error) {
         $message = "Error while saving data: $error";
         $message_tag = "danger";
     }
-    redirect("edit-course?id=$id", $message, $message_tag);
+    redirect('add-course', $message, $message_tag);
 }
 
 // Generating CSRF Token
@@ -83,8 +61,7 @@ $context = [
     'uni'=> $uni,
     'title'=> $title,
     'staff'=> $staff,
-    'departments'=> $departments,
-    'course'=> $course
+    'departments'=> $departments
 ];
 
-staff_view('edit-course', $context);
+staff_view('add-course', $context);

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conference Call</title>
+    <title>Group Conference</title>
     <link rel="stylesheet" href="<?=STATIC_ROOT; ?>/connect/css/main.css">
     <script>
         let room = "<?=$context['room']['name']; ?>";

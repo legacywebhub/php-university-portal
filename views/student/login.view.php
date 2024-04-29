@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Edumin - Bootstrap Admin Dashboard </title>
+    <title><?=$context['title']; ?></title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?=STATIC_ROOT; ?>/dashboard/images/favicon.png">
     <link href="<?=STATIC_ROOT; ?>/dashboard/css/style.css" rel="stylesheet">
@@ -52,7 +52,7 @@
 												</div>
                                             </div>
                                             <div class="form-group">
-                                                <a href="page-forgot-password.html">Forgot Password?</a>
+                                                <a href="#">Forgot Password?</a>
                                             </div>
                                         </div>
                                         <div class="text-center">

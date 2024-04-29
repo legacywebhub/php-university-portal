@@ -1,7 +1,7 @@
 <?php
 
 // Authorizing management staff
-$superstaff = superstaff_logged_in();
+$staff = staff_logged_in();
 
 // Other variables
 $uni = query_fetch("SELECT * FROM settings ORDER BY id DESC LIMIT 1")[0];
@@ -19,8 +19,8 @@ if (isset($_GET['search'])) {
 $context = [
     'uni'=> $uni,
     'title'=> $title,
-    'superstaff'=> $superstaff,
+    'staff'=> $staff,
     'students'=> $students
 ];
 
-management_view('students', $context);
+staff_view('students', $context);

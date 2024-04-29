@@ -1,6 +1,6 @@
 <?php
 
-// Authorizing management staff
+// Authorizing staff
 $staff = staff_logged_in();
 
 // Authenticating view

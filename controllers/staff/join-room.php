@@ -1,7 +1,7 @@
 <?php
 
-// Authorizing management staff
-$superstaff = superstaff_logged_in();
+// Authorizing staff
+$staff = staff_logged_in();
 
 // Variables
 $uni = query_fetch("SELECT * FROM settings ORDER BY id DESC LIMIT 1")[0];
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
 $context = [
     'uni'=> $uni,
     'title'=> $title,
-    'superstaff'=> $superstaff
+    'staff'=> $staff
 ];
 
-management_view('join-room', $context);
+staff_view('join-room', $context);

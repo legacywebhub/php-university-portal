@@ -60,7 +60,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo">
+            <a href="dashboard" class="brand-logo">
                 <img class="logo-abbr" src="<?=STATIC_ROOT; ?>/dashboard/images/logo-white.png" alt="">
                 <img class="logo-compact" src="<?=STATIC_ROOT; ?>/dashboard/images/logo-text-white.png" alt="">
                 <img class="brand-title" src="<?=STATIC_ROOT; ?>/dashboard/images/logo-text-white.png" alt="">
@@ -90,7 +90,7 @@
                                 </span>
                                 <div class="dropdown-menu p-0 m-0">
                                     <form>
-                                        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                                        <input class="form-control" name="search" placeholder="Search" maxlength="30" required>
                                     </form>
                                 </div>
                             </div>
@@ -220,8 +220,8 @@
 							<span class="nav-text">Library</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="#">All Library</a></li>
-                            <li><a href="#">Add Library</a></li>
+                            <li><a href="javascript:void(0);">All Library</a></li>
+                            <li><a href="javascript:void(0);">Add Library</a></li>
                         </ul>
                     </li>
 					<li><a class="has-arrow" href="javascript:void(0);" aria-expanded="false">

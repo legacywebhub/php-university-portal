@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2024 at 06:41 PM
+-- Generation Time: Apr 29, 2024 at 01:32 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `learningportal_db`
+-- Database: `uniportal_db`
 --
 
 -- --------------------------------------------------------
@@ -84,7 +84,8 @@ CREATE TABLE `departments` (
 INSERT INTO `departments` (`id`, `faculty_id`, `department_code`, `name`, `short_name`, `start_level`, `end_level`, `head_of_department`, `reg_date`) VALUES
 (1, 1, 374, 'Industrial And Production Engineering', 'IPE', 100, 500, '', '2024-02-09'),
 (2, 3, 254, 'Computer Science', 'CSC', 100, 400, '', '2024-02-09'),
-(3, 3, 215, 'Mathematics', 'MAT', 100, 400, '', '2024-02-09');
+(3, 3, 215, 'Mathematics', 'MAT', 100, 400, '', '2024-02-09'),
+(4, 1, 375, 'Mechanical Engineering', 'MCE', 100, 500, NULL, '2024-04-29');
 
 -- --------------------------------------------------------
 
@@ -124,7 +125,9 @@ CREATE TABLE `faculties` (
 INSERT INTO `faculties` (`id`, `name`, `reg_date`) VALUES
 (1, 'Faculty of Engineering', '2024-02-08'),
 (2, 'Faculty of Arts', '2024-02-08'),
-(3, 'Faculty of Physical Sciences', '2024-02-08');
+(3, 'Faculty of Physical Sciences', '2024-02-08'),
+(4, 'Faculty of Social Science', '2024-04-29'),
+(5, 'Faculty of Law', '2024-04-29');
 
 -- --------------------------------------------------------
 
@@ -268,7 +271,7 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `name`, `expires`) VALUES
-(1, 'engineering', '2024-04-25 20:35:10');
+(6, 'engineering', '2024-04-27 15:00:16');
 
 -- --------------------------------------------------------
 
@@ -337,7 +340,10 @@ CREATE TABLE `staffs` (
 --
 
 INSERT INTO `staffs` (`id`, `staff_id`, `department_id`, `passport`, `role`, `title`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `email`, `phone`, `password`, `is_blocked`, `is_superuser`, `reg_date`, `reset_token_hash`, `reset_token_expires`) VALUES
-(1, '2024374144', 1, 'IMG-65c7e647c89ea6.23813515.jpg', 'professor', 'Engr.', 'Paulson', '', 'Bosah', 'M', '0000-00-00', 'legacywebhub@gmail.com', '09160755152', '$2y$10$2UpzBY81ys5dXAEEM25YwO288nkxuWtEzLrA/HKcwJSkyDu/fBONq', 0, 1, '2024-02-10', NULL, NULL);
+(1, '2024374144', 1, 'IMG-65c7e647c89ea6.23813515.jpg', 'professor', 'Engr.', 'Paulson', '', 'Bosah', 'M', NULL, 'legacywebhub@gmail.com', '09160755152', '$2y$10$2UpzBY81ys5dXAEEM25YwO288nkxuWtEzLrA/HKcwJSkyDu/fBONq', 0, 1, '2024-02-10', NULL, NULL),
+(2, '2024374036', 1, 'IMG-65c7e647c89ea6.23813515.jpg', 'professor', 'Engr.', 'Chinedu', NULL, 'Egwu', 'M', NULL, 'paulsonbosah@gmail.com', '09017570620', '$2y$10$2UpzBY81ys5dXAEEM25YwO288nkxuWtEzLrA/HKcwJSkyDu/fBONq', 0, 0, '2024-04-26', NULL, NULL),
+(3, '2024254144', 2, NULL, 'professor', 'Dr.', 'Joy', '', 'Anekwe', 'F', NULL, 'joyanekwe@gmail.com', '09160755152', '$2y$10$2UpzBY81ys5dXAEEM25YwO288nkxuWtEzLrA/HKcwJSkyDu/fBONq', 0, 1, '2024-02-10', NULL, NULL),
+(4, '2024254001', 2, NULL, 'hod', 'Dr.', 'Legacy', 'Web', 'Hub', 'M', NULL, 'legacywebtechnologies@gmail.com', NULL, '$2y$10$2UpzBY81ys5dXAEEM25YwO288nkxuWtEzLrA/HKcwJSkyDu/fBONq', 0, 1, '2024-02-10', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -377,7 +383,9 @@ CREATE TABLE `students` (
 INSERT INTO `students` (`id`, `matric_number`, `department_id`, `level`, `passport`, `firstname`, `middlename`, `lastname`, `gender`, `dob`, `blood_group`, `email`, `phone`, `address`, `parent_name`, `parent_email`, `parent_phone`, `password`, `reg_date`, `is_blocked`, `reset_token_hash`, `reset_token_expires`) VALUES
 (1, 'CSC/078741/24', 2, 100, 'IMG-65c7fb453a8b99.58584436.jpg', 'Paulson', 'Chinedu', 'Bosah', 'M', '0000-00-00', NULL, 'legacywebhub@gmail.com', '09160755152', NULL, NULL, NULL, NULL, '$2y$10$QbbGE/ktM7SopfTiNEbrnumVdCn20C0GD5F38pttln.fxrVRE//Zm', '2024-02-10', 0, NULL, NULL),
 (2, 'CSC/003192/24', 2, 100, NULL, 'Victor', 'Chukwudumebi', 'Egwu', 'M', '8991-01-10', NULL, 'dumebi@gmail.com', '09160755152', NULL, NULL, NULL, NULL, '$2y$10$0prTP1VG8V15CFEfKSoTd.GGu91/SHmyEHTVBKon9Qjl1ddx78jRa', '2024-02-12', 0, NULL, NULL),
-(3, 'CSC/073429/24', 2, 100, 'IMG-65c9e9dc5c03b5.70878310.jpg', 'Favour', '', 'Bosah', 'M', '8991-01-10', NULL, 'favourbosah@gmail.com', '09160755152', NULL, NULL, NULL, NULL, '$2y$10$g76z6t97DFFRoSFw.4/8nuCwPrbylAFY8jKPemH0uyz9X4i30d3w6', '2024-02-12', 0, NULL, NULL);
+(3, 'CSC/073429/24', 2, 100, 'IMG-65c9e9dc5c03b5.70878310.jpg', 'Favour', '', 'Bosah', 'M', '8991-01-10', NULL, 'favourbosah@gmail.com', '09160755152', NULL, NULL, NULL, NULL, '$2y$10$g76z6t97DFFRoSFw.4/8nuCwPrbylAFY8jKPemH0uyz9X4i30d3w6', '2024-02-12', 0, NULL, NULL),
+(4, 'CSC/088741/24', 1, 100, NULL, 'Kingsley', 'Chibuike', 'Mmadu', 'M', NULL, NULL, 'kingsleymmadu@gmail.com', NULL, NULL, NULL, NULL, NULL, '$2y$10$QbbGE/ktM7SopfTiNEbrnumVdCn20C0GD5F38pttln.fxrVRE//Zm', '2024-04-29', 0, NULL, NULL),
+(5, 'CSC/000000/24', 1, 300, NULL, 'Peace', '', 'Ikemefuna', 'F', NULL, NULL, 'peaceikemefuna@gmail.com', NULL, NULL, NULL, NULL, NULL, '$2y$10$QbbGE/ktM7SopfTiNEbrnumVdCn20C0GD5F38pttln.fxrVRE//Zm', '2024-04-29', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -580,7 +588,7 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `documents`
@@ -592,7 +600,7 @@ ALTER TABLE `documents`
 -- AUTO_INCREMENT for table `faculties`
 --
 ALTER TABLE `faculties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `fees`
@@ -640,7 +648,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `semesters`
@@ -658,13 +666,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `staffs`
 --
 ALTER TABLE `staffs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tests`

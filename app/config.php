@@ -20,7 +20,7 @@ if ($_SERVER["SERVER_NAME"]  == "localhost") {
 
     // DATABASE PARAMETERS FOR LOCALHOST
     define('DBHOST', "localhost");
-    define('DBNAME', "learningportal_db");
+    define('DBNAME', "uniportal_db");
     define('DBUSER', "root");
     define('DBPASS', "");
 
@@ -31,8 +31,8 @@ if ($_SERVER["SERVER_NAME"]  == "localhost") {
 
     // EMAIL CONFIG
     define('EMAIL_HOST', "smtp.gmail.com");
-    define('EMAIL_USERNAME', "legacywebtechnologies@gmail.com");
-    define('EMAIL_PASSWORD', "qwzwsjxljxgabecx");
+    define('EMAIL_USERNAME', "");
+    define('EMAIL_PASSWORD', "");
     define('EMAIL_PORT', 465);
 
     // OTHERS

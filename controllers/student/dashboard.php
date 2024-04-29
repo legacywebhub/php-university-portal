@@ -9,7 +9,7 @@ $student_level = $student['level'];
 // Other variables
 $uni = query_fetch("SELECT * FROM settings ORDER BY id DESC LIMIT 1")[0];
 $title = ucfirst($uni['name'])." | Dashboard";
-$coursemates = query_fetch("SELECT * FROM students WHERE department_id = $student_department_id AND level = $student_level");
+$coursemates = query_fetch("SELECT * FROM students WHERE department_id = $student_department_id AND level = $student_level AND id != $student_id");
 $my_messages = query_fetch("SELECT * FROM messages WHERE receiver_id = $student_id LIMIT 3");
 
 // Appending extra student details
